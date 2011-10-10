@@ -1,0 +1,13 @@
+*.mo
+*.egg-info
+*.egg
+*.EGG
+*.EGG-INFO
+bin
+env
+dist
+*.pyc
+*.pyo
+*.tmp*
+*~
+*.swp
