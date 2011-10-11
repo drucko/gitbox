@@ -1,4 +1,4 @@
-import os, sys, time
+import os, sys, time, subprocess
 
 from fnmatch import fnmatch
 from Queue import Queue
@@ -19,12 +19,12 @@ class EventHandler(FileSystemEventHandler):
     def on_any_event(self, event):
         head, tail = os.path.split(event.src_path) 
         match = [fnmatch(tail, p) for p in self.ignore]
-        if True not in match:
+        if True not in match and '.git' not in head:
             self.queue.put(tail)
 
 
 class WatchMan():
-    def __init__(self, name, path):
+    def __init__(self, name, path ):
         self.name = name
         self.path = path
        
@@ -55,8 +55,21 @@ class WatchMan():
 
             if time.time()-lastchange >= 10 and self.queue.qsize() > 0:
                 files = self.get_changes()
+                print files
+                print self.queue.qsize()
                 notify('GitBox Sync for:', ', '.join(files))
+                cmd = 'git add .'
+                process = subprocess.Popen(cmd.split(' '), cwd=self.path)
+                process.communicate()
             
+                cmd = 'git commit -am auto-commit'
+                process = subprocess.Popen(cmd.split(' '), cwd=self.path)
+                process.communicate()
+                
+                cmd = 'git push'
+                process = subprocess.Popen(cmd.split(' '), cwd=self.path)
+                process.communicate()
+
             qsize = self.queue.qsize()
             time.sleep(1)
 

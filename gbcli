@@ -7,17 +7,17 @@ from gitbox.watchman import WatchMan
 def main():
     p = optparse.OptionParser(
         description='GitBox != DropBox',
-        prog='gitboxd',
-        version='pyarping 0.1',
+        prog='gbcli',
+        version='gitbox 0.1',
         usage='%prog -n myProject -p ./')
 
 
-    p.add_option('--project', '-n', default="Unamed")
+    p.add_option('--project', '-n', default="NoName Project")
     p.add_option('--path', '-p')
 
     options, arguments = p.parse_args()
 
-    if not 'path' in arguments:
+    if not options.path:
         print p.print_help()
     else: 
         try:
