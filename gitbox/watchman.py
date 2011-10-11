@@ -6,10 +6,7 @@ from Queue import Queue
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
-if sys.platform.startswith('darwin'): from notify import notify_on_darwin as notify
-elif sys.platform.startswith('win32'): from notify import notify_on_windows as notify
-elif sys.platform.startswith('linux'): from notify import notify_on_linux as notify
-
+from notify import notify
 
 class EventHandler(FileSystemEventHandler):
     def __init__(self, queue):
@@ -30,10 +27,15 @@ class WatchMan():
        
         self.queue = Queue()
         event_handler = EventHandler(self.queue)
-       
+
         self.observer = Observer()
         self.observer.schedule(event_handler, path, recursive=True)
-        self.observer.start()
+
+        # Ensure we do NOT use kqueue on MacOSX.
+        if sys.platform.startswith('darwin'):
+            for ermitter in self.observer._emitters:
+                if ermitter.__class__.__name__ != 'FSEventsEmitter':
+                    raise AssertionError, 'Found unsupported observer on MacOSX: ' + ermitter.__class__.__name__
 
     def get_changes(self):
         files = []
@@ -46,7 +48,8 @@ class WatchMan():
         return files
 
     def start(self):
-        notify('Starting GitBox','...')
+        notify('Starting GitBox', self.name + ' (' + self.path + ')')
+        self.observer.start()
         qsize = self.queue.qsize()
         lastchange = time.time()
         while True:
@@ -55,7 +58,7 @@ class WatchMan():
 
             if time.time()-lastchange >= 10 and self.queue.qsize() > 0:
                 files = self.get_changes()
-                notify('GitBox Sync for:', ', '.join(files))
+                notify('GitBox Sync for', ', '.join(files))
                 cmd = 'git add .'
                 process = subprocess.Popen(cmd.split(' '), cwd=self.path)
                 process.communicate()

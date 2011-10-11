@@ -29,3 +29,10 @@ or
 
 for more information 
 
+## Troubleshooting
+
+### Too many open files
+
+For MacOSX it's required to install the python library watchdog from source
+repository because the pip version does not contains the FSEvent library:
+http://packages.python.org/watchdog/installation.html#installing-from-source-tarballs
