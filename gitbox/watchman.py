@@ -55,8 +55,6 @@ class WatchMan():
 
             if time.time()-lastchange >= 10 and self.queue.qsize() > 0:
                 files = self.get_changes()
-                print files
-                print self.queue.qsize()
                 notify('GitBox Sync for:', ', '.join(files))
                 cmd = 'git add .'
                 process = subprocess.Popen(cmd.split(' '), cwd=self.path)

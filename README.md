@@ -21,11 +21,11 @@ Activate Virtualenv
 
 Start gitbox
 
-    gitcli -n Test -p ./
+    gbcli -p ./
 
 or 
 
-    gitcli --help
+    gbcli --help
 
 for more information 
 
