@@ -4,7 +4,7 @@ Simple and automatically sync deamon for git repositories. A dropbox alternative
 
 ## Install
 
-   python setup.py install 
+   pip install gitbox
 
 ## Try
 
