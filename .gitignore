@@ -12,3 +12,4 @@ build
 *.tmp*
 *~
 *.swp
+build
