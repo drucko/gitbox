@@ -6,10 +6,11 @@ Simple and automatically sync deamon for git repositories. A dropbox alternative
 
 gitbox is on pypi :)
 
+
    pip install gitbox
 
 
-## Prepear Your remote repository for gitbox
+## Prepare Your remote repository for gitbox
 
 for pushing updates to the client we use pubnub http://pubnub.com. There is a free account with 5000 messages a day.
 
@@ -41,8 +42,10 @@ for more information try
 
 ## Changelog
 
-0.1.3 auto pull and messaging through pupnup
+0.1.3 auto pull and messaging through pubnub
+
 0.1.2 push to remote
+
 0.1.1 monitoring and notifications
 
 ## Troubleshooting
