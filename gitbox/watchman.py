@@ -1,4 +1,4 @@
-import os, sys, time, subprocess
+import os, sys, time, subprocess, threading
 
 from fnmatch import fnmatch
 from Queue import Queue
@@ -7,6 +7,9 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
 from notify import notify
+
+from Pubnub import Pubnub
+
 
 class EventHandler(FileSystemEventHandler):
     def __init__(self, queue):
@@ -20,9 +23,9 @@ class EventHandler(FileSystemEventHandler):
             self.queue.put(tail)
 
 
-class WatchMan():
-    def __init__(self, name, path ):
-        self.name = name
+class WatchLocal():
+    def __init__(self, pid, path ):
+        self.pid = pid
         self.path = path
        
         self.queue = Queue()
@@ -48,7 +51,7 @@ class WatchMan():
         return files
 
     def start(self):
-        notify('Starting GitBox', self.name + ' (' + self.path + ')')
+        notify('GitBox Start', 'monitoring %s' % self.path )
         self.observer.start()
         qsize = self.queue.qsize()
         lastchange = time.time()
@@ -58,7 +61,7 @@ class WatchMan():
 
             if time.time()-lastchange >= 10 and self.queue.qsize() > 0:
                 files = self.get_changes()
-                notify('GitBox Sync for', ', '.join(files))
+                notify('GitBox Upload', 'send new and changed files in %' )
                 cmd = 'git add .'
                 process = subprocess.Popen(cmd.split(' '), cwd=self.path)
                 process.communicate()
@@ -70,7 +73,7 @@ class WatchMan():
                 cmd = 'git push'
                 process = subprocess.Popen(cmd.split(' '), cwd=self.path)
                 process.communicate()
-
+                
             qsize = self.queue.qsize()
             time.sleep(1)
 
@@ -79,11 +82,27 @@ class WatchMan():
         self.observer.stop()
         self.observer.join()
 
-if  __name__ == "__main__":
 
-    wm = WatchMan('Document' , sys.argv[1])
 
-    try:
-        wm.start()
-    except KeyboardInterrupt:
-        wm.stop()
+class WatchRemote():
+    """monitoring remote repository"""
+
+    def __init__(self, pid, path, key ):
+        self.pid = pid
+        self.path = path
+        self.pubnub = Pubnub( None, key, None, False )
+
+    
+    def receive(self,message) :
+        notify('GitBox Download', 'receiving new and changed files in %s' % self.path)
+        cmd = 'git push'
+        process = subprocess.Popen(cmd.split(' '), cwd=self.path)
+        process.communicate()
+        return True
+
+    def start(self):
+        ## Initiat Class
+        self.pubnub.subscribe({'channel'  : self.pid, 'callback' : self.receive })
+
+    def stop(self):
+        pass
