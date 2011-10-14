@@ -1,6 +1,6 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
-import optparse, pp
+import optparse
 
 import threading
 
@@ -13,8 +13,8 @@ def main():
     p = optparse.OptionParser(
         description='GitBox != DropBox',
         prog='gbcli',
-        version='gitbox 0.1',
-        usage='%prog -n myProject -p ./')
+        version='gitbox 0.1.3',
+        usage='%prog -i <project id> -p <repositori path> -k <pupnub subscription key>')
 
 
     p.add_option('--id', '-i', dest="pid",  help="the project id")
