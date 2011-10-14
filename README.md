@@ -2,12 +2,15 @@
 
 Simple and automatically sync deamon for git repositories. A dropbox alternative.
 
-
 ## Install
 
-gitbox is on [pypi](http://pypi.python.org/pypi/gitbox) :)
+gitbox is available via python package management system [pypi](http://pypi.python.org/pypi/gitbox) :)
 
-    pip install gitbox
+    sudo pip install gitbox
+
+If your system does not contain the pip command, just install it with this command:
+
+    sudo easy_install pip
 
 
 ## Prepare Your remote repository for gitbox
