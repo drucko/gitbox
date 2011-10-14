@@ -9,7 +9,8 @@ Simple and automatically sync deamon for git repositories. A dropbox alternative
 * git
 * A remote git repository!
 * A [PubNub](http://pubnub.com) account if you want push notifications to your other clients!
-
+* [Growl](http://growl.info/) on Mac OS X
+* an libnotify client on Linux (included in KDE, Gnome, Unity and XFCE. Minimal WM users should try [statnot](https://github.com/halhen/statnot).)
 
 ## Installation
 
