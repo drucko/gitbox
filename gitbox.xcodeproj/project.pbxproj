@@ -1,0 +1,74 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		59B15AE6144CC4DD00FE36B6 /* gitbox */ = {isa = PBXFileReference; lastKnownFileType = folder; path = gitbox; sourceTree = "<group>"; };
+		59E35FF5144CC3B70037B7A7 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		598402AF144CC2B000BA63DB = {
+			isa = PBXGroup;
+			children = (
+				59B15AE6144CC4DD00FE36B6 /* gitbox */,
+				59E35FF5144CC3B70037B7A7 /* MainMenu.xib */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		598402B1144CC2B000BA63DB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 598402B4144CC2B000BA63DB /* Build configuration list for PBXProject "gitbox" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 598402AF144CC2B000BA63DB;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		598402B6144CC2B000BA63DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		598402B7144CC2B000BA63DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		598402B4144CC2B000BA63DB /* Build configuration list for PBXProject "gitbox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				598402B6144CC2B000BA63DB /* Debug */,
+				598402B7144CC2B000BA63DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 598402B1144CC2B000BA63DB /* Project object */;
+}
