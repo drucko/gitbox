@@ -3,6 +3,7 @@ bin
 dist
 build
 .DS_Store
+*/project.xcworkspace
 *.mo
 *.egg-info
 *.egg
